@@ -2,8 +2,14 @@ import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
 import User from './models/User.js';
+import authRoutes from './routes/auth.js';
+import passwordRoutes from './routes/passwords.js';
 
 const app = express();
+
+app.use(express.json());
+app.use('/api/auth', authRoutes);
+app.use('/api/passwords', passwordRoutes);
 
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => console.log('Connected to MongoDB!'))
@@ -42,7 +48,6 @@ app.post('/api/test-user', async (req, res) => {
     }
     
 });
-
 
 
 const PORT = 3000;
