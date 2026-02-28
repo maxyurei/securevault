@@ -2,6 +2,7 @@ import express from 'express';
 import User from '../models/User.js';
 import authMiddleware from '../middleware/auth.js';
 import { decrypt, encrypt } from '../utils/encryption.js';
+import { validatePassword } from '../middleware/validation.js';
 
 
 const router = express.Router();
@@ -10,7 +11,7 @@ const router = express.Router();
 router.use(authMiddleware);
 
 
-router.post('/', async (req, res) => {
+router.post('/', validatePassword, async (req, res) => {
     try{
         const {website, username, password} = req.body;
         const userId = req.userId;

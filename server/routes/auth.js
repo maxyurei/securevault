@@ -4,10 +4,11 @@ import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import authMiddleware from '../middleware/auth.js';
+import { validateSignup } from '../middleware/validation.js';
 
 const router = express.Router();
 
-router.post('/signup', async (req, res) => {
+router.post('/signup', validateSignup, async (req, res) => {
     try {
         const {email, password} = req.body;
 
@@ -35,7 +36,7 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-router.post('/login', async (req, res) => {
+router.post('/login', validateSignup, async (req, res) => {
     try{
         const {email, password} = req.body;
         const user = await User.findOne({email});
