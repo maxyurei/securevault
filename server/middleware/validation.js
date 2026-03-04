@@ -14,7 +14,7 @@ export const validateSignup = (req, res, next) => {
         return res.status(400).json({error: 'Password must be at least 6 characters'});
     }
 
-    next();errormessage
+    next();
 }
 
 export const validatePassword = (req, res, next) => {

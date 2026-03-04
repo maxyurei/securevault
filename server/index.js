@@ -4,8 +4,12 @@ import mongoose from 'mongoose';
 import User from './models/User.js';
 import authRoutes from './routes/auth.js';
 import passwordRoutes from './routes/passwords.js';
+import cors from 'cors';
 
 const app = express();
+
+// CORS 
+app.use(cors());
 
 app.use(express.json());
 app.use('/api/auth', authRoutes);
