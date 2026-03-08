@@ -4,7 +4,7 @@ import PasswordCard from "../components/PasswordCard";
 import PasswordForm from "../components/PasswordForm";
 
 
-function DashBoard({onLogout}) {
+function DashBoard({ onLogout }) {
 
     const [passwords, setPasswords] = useState([]);
     const [isError, setError] = useState("");
@@ -59,8 +59,8 @@ function DashBoard({onLogout}) {
                 ) : p
             )));
         } else {
-            await savePassword(data.website, data.username, data.password);
-            setPasswords([...passwords, data]);
+            const response = await savePassword(data.website, data.username, data.password);
+            setPasswords([...passwords, response.savePassword]);
         }
 
         setEditPassword(null);
@@ -72,8 +72,25 @@ function DashBoard({onLogout}) {
     if (passwords.length === 0) return <h4>No Saved Passwords</h4>;
 
     return (
-    <div>
-        <h1>DashBoard</h1>
+    <div className="p-6 max-w-7xl mx-auto">
+
+<div className="flex justify-between items-center mb-8">
+  <div className="w-32">
+    <button onClick={handleAdd} className="btn-primary cursor-pointer">
+      Add New Password
+    </button>
+  </div>
+  
+  <h1 className="text-3xl uppercase text-gray-200 font-bold">Dashboard</h1>
+  
+  <div className="w-32 flex justify-end">
+    <button onClick={onLogout} className="btn-secondary cursor-pointer">
+      Logout
+    </button>
+  </div>
+</div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {passwords.map((data) => (
             <PasswordCard
             key={data._id}
@@ -82,23 +99,18 @@ function DashBoard({onLogout}) {
             onEdit={handleEdit}
             />
         ))}
-
-        <div>
-            <button onClick={handleAdd}>
-                Add New Password
-            </button>
         </div>
 
         {showForm && (
+        <div className="fixed inset-0 bg-black/50 bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 max-w-md w-full">
             <PasswordForm
             onSave={handleSave} 
             onCancel={() => setShowForm(false)}
             initalData={editPassword} />
+            </div>
+            </div>
         )}
-
-        <button onClick={onLogout}>
-            Logout
-        </button>
     </div>
 )}
 

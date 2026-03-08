@@ -36,24 +36,21 @@ function App() {
   }
 
   return (
-    <div style={{ maxWidth: '400px', margin: '50px auto' }}>
-      <h1>SecureVault</h1>
+    <div className="max-w-med mx-auto">
+      <h1 className="text-center text-4xl text-gray-300 font-bold my-5 uppercase tracking-tight">SecureVault</h1>
       
-      <div style={{ marginBottom: '20px' }}>
+      <div className="mb-5 flex justify-center gap-3">
         <button 
           onClick={() => setIsLogin(true)}
-          style={{ 
-            marginRight: '10px',
-            fontWeight: isLogin ? 'bold' : 'normal'
-          }}
+          className={`px-4 py-2 ${isLogin ? 'font-bold text-blue-600 border-b-2 border-blue-600' :
+            'font-normal text-gray-600 hover:text-blue-800 transition-colors duration-300'}`}
         >
           Login
         </button>
         <button 
           onClick={() => setIsLogin(false)}
-          style={{ 
-            fontWeight: !isLogin ? 'bold' : 'normal'
-          }}
+          className={`px-4 py-2 ${!isLogin ? 'font-bold text-blue-600 border-b-2 border-blue-600' :
+          'font-normal text-gray-600 hover:text-blue-800 transition-colors duration-300'}`}
         >
           Sign Up
         </button>
